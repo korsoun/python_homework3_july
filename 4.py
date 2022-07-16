@@ -1,5 +1,6 @@
 # Напишите программу, которая будет преобразовывать десятичное число в двоичное.
 
+# Программа позволяет перевести дробные числа. 
 def get_binary_number (number, digits):
     str_number = str(number)  # Строковое представление введенного числа
     int_part = ''  # Строковое представление целой части
@@ -19,11 +20,13 @@ def get_binary_number (number, digits):
         digit_int_part //= 2
     str_binary_int = str_binary_int[::-1] # Переворачиваем строку, чтоб получить правильный вид
     float_fract_part = float(fract_part)  # Числовой формат дробной части
-    str_binary_fract = '.'  # Строковое представление дробной части в двоичном формате
+    str_binary_fract = '.'  # Строковое представление дробной части в двоичном формате  
     while len(str_binary_fract) < digits + 1: # Задание требуемой значности с учетом точки
         str_binary_fract += str(int(float_fract_part * 2)) # Запись целой части удвоения
         float_fract_part = float('0.' + str(float_fract_part * 2)[2:])  # Взяли дробную часть, умножили на 2, перевели в строку, получили срезом цифры после точки, составили строку вида 0.ХХХ, перевели в число
     whole_binary = float(f'{str_binary_int}{str_binary_fract}') # Результат
+    if(digits == 0 or number % 1 == 0):
+        whole_binary = int(str_binary_int)
     return whole_binary
 
 num = float(input('Введите число, используя точку в качестве разделителя:'))
